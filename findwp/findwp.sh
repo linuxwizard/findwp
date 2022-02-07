@@ -40,6 +40,9 @@ user_scan() {
 
 }
 
+if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
+[[ -z "$USERNAME" ]] && { echo "Can't find username. Pass it as a parameter (sh findwp.sh <user>)"; exit 1; }
+
 wget -qO /tmp/wp_version_file http://api.wordpress.org/core/stable-check/1.0/ > /dev/null
 
 if [ -f /tmp/wp_version_file ]
